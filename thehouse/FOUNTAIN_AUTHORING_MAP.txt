@@ -1,0 +1,469 @@
+FOUNTAIN_AUTHORING_MAP.txt
+Version: 1.0
+Purpose: Deterministic formatting map for Aider/local LLMs authoring screenplay.fountain
+
+CORE PRIME DIRECTIVE
+- The author provides content. Your job is to place and lightly format it as valid Fountain.
+- Preserve author wording.
+- Do not invent story, dialogue, descriptions, transitions, locations, or character intent.
+- When uncertain, add a Fountain note using [[...]] rather than guessing.
+
+============================================================
+1. TITLE PAGE METADATA
+============================================================
+
+INPUT INTENT:
+"The title is..."
+"Call it..."
+"Author is..."
+"Draft date is..."
+
+FOUNTAIN OUTPUT:
+Title: <title>
+Credit: Written by
+Author: <author>
+Draft date: <date>
+
+RULES:
+- Title page fields must appear at the very top of screenplay.fountain.
+- Leave one blank line after title metadata before screenplay content.
+- Do not duplicate title metadata if it already exists.
+- Update existing metadata if explicitly instructed.
+
+============================================================
+2. SCENE HEADINGS / SLUGLINES
+============================================================
+
+INPUT INTENT:
+"Scene: diner at night"
+"We are inside the diner"
+"Exterior parking lot, day"
+"Cut to the apartment, night"
+
+FOUNTAIN OUTPUT:
+INT. DINER - NIGHT
+EXT. PARKING LOT - DAY
+INT. APARTMENT - NIGHT
+
+RULES:
+- Scene headings should be uppercase.
+- Use INT. for interior scenes.
+- Use EXT. for exterior scenes.
+- Use INT./EXT. only when both are clearly intended.
+- Use format: INT. LOCATION - TIME
+- Common times: DAY, NIGHT, MORNING, AFTERNOON, EVENING, LATER, CONTINUOUS
+- If location/time is unclear, do not invent. Add: [[scene heading unclear]]
+
+============================================================
+3. ACTION / DESCRIPTION
+============================================================
+
+INPUT INTENT:
+"John enters the room."
+"Rain hits the window."
+"Mary looks at him but says nothing."
+
+FOUNTAIN OUTPUT:
+John enters the room.
+
+Rain hits the window.
+
+Mary looks at him but says nothing.
+
+RULES:
+- Action is plain text.
+- Preserve wording.
+- Keep paragraph breaks readable.
+- Do not make action more cinematic unless explicitly asked.
+- Do not add camera directions unless provided by the author.
+
+============================================================
+4. CHARACTER DIALOGUE
+============================================================
+
+INPUT INTENT:
+"John says..."
+"Mary replies..."
+"Then Bob says..."
+"JOHN: ..."
+"Mary: ..."
+
+FOUNTAIN OUTPUT:
+JOHN
+Dialogue text.
+
+MARY
+Dialogue text.
+
+RULES:
+- Character names must be uppercase.
+- Dialogue goes directly below the character name.
+- Leave a blank line between dialogue blocks.
+- Preserve punctuation and wording.
+- If input uses 'says' or 'replies', remove those framing words and format as dialogue.
+
+EXAMPLE INPUT:
+John says: I thought we were done with this.
+Mary replies: We were. Until he called.
+
+EXAMPLE OUTPUT:
+JOHN
+I thought we were done with this.
+
+MARY
+We were. Until he called.
+
+============================================================
+5. PARENTHETICALS
+============================================================
+
+INPUT INTENT:
+"John quietly says..."
+"Mary, whispering:"
+"John says under his breath..."
+
+FOUNTAIN OUTPUT:
+JOHN
+(quietly)
+Dialogue text.
+
+MARY
+(whispering)
+Dialogue text.
+
+RULES:
+- Use parentheticals only when the author clearly provides delivery/action.
+- Parentheticals should be lowercase unless proper noun.
+- Keep parentheticals short.
+- Place parenthetical between character name and dialogue.
+
+============================================================
+6. CONTINUED DIALOGUE
+============================================================
+
+INPUT INTENT:
+"John continues..."
+"John keeps going..."
+"Same speaker continues after action."
+
+FOUNTAIN OUTPUT:
+JOHN
+First dialogue.
+
+John looks away.
+
+JOHN
+Second dialogue.
+
+RULES:
+- Repeat the character name for continued speech after action.
+- Do not use CONT'D unless explicitly requested.
+- Preserve speech order.
+
+============================================================
+7. DUAL DIALOGUE
+============================================================
+
+INPUT INTENT:
+"John and Mary speak at the same time"
+"Overlapping dialogue"
+"Mary says this while John says that"
+
+FOUNTAIN OUTPUT:
+JOHN ^
+Dialogue text.
+
+MARY
+Dialogue text.
+
+RULES:
+- Use ^ after the first character name when dual dialogue is explicitly intended.
+- If simultaneity is unclear, format as normal sequential dialogue.
+
+============================================================
+8. TRANSITIONS
+============================================================
+
+INPUT INTENT:
+"Cut to..."
+"Fade out"
+"Smash cut to"
+"Dissolve to"
+
+FOUNTAIN OUTPUT:
+CUT TO:
+FADE OUT:
+SMASH CUT TO:
+DISSOLVE TO:
+
+RULES:
+- Transitions are uppercase and end with colon.
+- Use transitions only when explicitly provided.
+- Do not add CUT TO: between every scene.
+
+============================================================
+9. CENTERED TEXT
+============================================================
+
+INPUT INTENT:
+"Center this text"
+"Title card: Three Years Later"
+"On screen: THE END"
+
+FOUNTAIN OUTPUT:
+> THREE YEARS LATER <
+> THE END <
+
+RULES:
+- Use > text < for centered text.
+- Use sparingly.
+- Preserve author-provided wording.
+
+============================================================
+10. NOTES / TODO / UNCERTAINTY
+============================================================
+
+INPUT INTENT:
+"leave a note"
+"not sure where this goes"
+"fix later"
+"ambiguous placement"
+
+FOUNTAIN OUTPUT:
+[[note text]]
+
+STANDARD NOTES:
+[[placement unclear]]
+[[speaker unclear]]
+[[scene heading unclear]]
+[[time of day unclear]]
+[[verify character name]]
+[[author review needed]]
+
+============================================================
+11. SECTIONS / OUTLINE HEADINGS
+============================================================
+
+INPUT INTENT:
+"Act One"
+"Start sequence"
+"Scene cluster"
+
+FOUNTAIN OUTPUT:
+# ACT ONE
+## Sequence A
+### Scene Cluster
+
+RULES:
+- Use # for large structural sections.
+- Use ## for sequences.
+- Use ### for smaller groupings.
+- These are organizational and not screenplay scene headings.
+
+============================================================
+12. SYNOPSES
+============================================================
+
+INPUT INTENT:
+"Summary: John realizes the truth."
+"Synopsis: Mary decides to leave."
+
+FOUNTAIN OUTPUT:
+= John realizes the truth.
+= Mary decides to leave.
+
+RULES:
+- Use = for synopsis lines.
+- Synopsis lines are for outline/navigation, not screenplay action.
+
+============================================================
+13. EMPHASIS
+============================================================
+
+INPUT INTENT:
+"italicize this"
+"bold this"
+"make this bold italic"
+
+FOUNTAIN OUTPUT:
+*italic*
+**bold**
+***bold italic***
+
+RULES:
+- Preserve emphasis only when author requests it.
+- Do not add emphasis for style.
+
+============================================================
+14. LYRICS
+============================================================
+
+INPUT INTENT:
+"lyrics:"
+"song line:"
+"they sing..."
+
+FOUNTAIN OUTPUT:
+~Lyric text here
+
+RULES:
+- Use ~ for lyrics.
+- Preserve lyric line breaks if provided.
+- Do not invent lyrics.
+
+============================================================
+15. FORCED CHARACTER
+============================================================
+
+INPUT INTENT:
+"Character name is mixed case"
+"Character is McDonald"
+"The speaker name is not parsing correctly"
+
+FOUNTAIN OUTPUT:
+@McDONALD
+Dialogue text.
+
+RULES:
+- Use @ only when Fountain may not recognize the character name.
+- Prefer normal uppercase names when possible.
+
+============================================================
+16. FORCED ACTION
+============================================================
+
+INPUT INTENT:
+"This all-caps line is action, not a character"
+"BOOM is action"
+"Force this as action"
+
+FOUNTAIN OUTPUT:
+!BOOM!
+
+RULES:
+- Use ! to force action when a line might be misread as a character or heading.
+- Use sparingly.
+
+============================================================
+17. INSERTION BEHAVIOR
+============================================================
+
+DEFAULT:
+- Append new provided content to the current scene.
+- If no current scene exists, add it after the title page.
+- If placement is specified, insert at that location.
+- If placement is unclear, append and add [[placement unclear]].
+
+RULES:
+- Never reorder scenes unless explicitly instructed.
+- Never delete existing content unless explicitly instructed.
+- Avoid broad refactors.
+- Keep edits small and reviewable.
+
+============================================================
+18. CHARACTER NAME CONSISTENCY
+============================================================
+
+RULES:
+- Match existing character names exactly.
+- If JOHN exists, use JOHN, not JON or John.
+- If MARY ANN exists, use MARY ANN.
+- Do not silently rename characters.
+- If unclear, add [[verify character name]].
+
+============================================================
+19. COMMON AUTHOR INPUT TO FOUNTAIN OUTPUT MAP
+============================================================
+
+INPUT:
+John says X.
+
+OUTPUT:
+JOHN
+X.
+
+INPUT:
+Mary replies Y.
+
+OUTPUT:
+MARY
+Y.
+
+INPUT:
+John quietly says X.
+
+OUTPUT:
+JOHN
+(quietly)
+X.
+
+INPUT:
+Scene: kitchen, morning.
+
+OUTPUT:
+INT. KITCHEN - MORNING
+
+INPUT:
+Outside the school at night.
+
+OUTPUT:
+EXT. SCHOOL - NIGHT
+
+INPUT:
+Cut to the bar.
+
+OUTPUT:
+CUT TO:
+
+INT. BAR - [[time of day unclear]]
+
+INPUT:
+Note to self: fix this.
+
+OUTPUT:
+[[fix this]]
+
+INPUT:
+Act two begins.
+
+OUTPUT:
+# ACT TWO
+
+INPUT:
+Summary: John realizes Mary lied.
+
+OUTPUT:
+= John realizes Mary lied.
+
+============================================================
+20. STRICT PROHIBITIONS FOR AIDER
+============================================================
+
+DO NOT:
+- Rewrite creatively unless explicitly asked.
+- Add new content not supplied by the author.
+- Invent names, locations, plot, emotional subtext, or transitions.
+- Change the ending or structure.
+- Convert Fountain into Markdown, LaTeX, prose, or another format.
+- Add commentary outside the file unless asked.
+- Over-format.
+- Use screenplay software terminology in the screenplay file itself.
+- Remove author notes.
+- Normalize style in a way that changes voice.
+
+============================================================
+21. QUALITY CHECK BEFORE FINALIZING EDIT
+============================================================
+
+Before completing an edit, verify:
+- Title metadata, if present, remains at the top.
+- Scene headings look like INT./EXT. LOCATION - TIME.
+- Character names are uppercase.
+- Dialogue appears under character names.
+- Action remains plain text.
+- Notes use [[...]].
+- No invented content was added.
+- Edits are minimal and localized.
+- Existing order is preserved.
+
+END OF MAP
